@@ -4,17 +4,7 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-  <header>
-    
-
-    <div class="wrapper">
-      <HelloWorld msg="" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <HelloWorld />
 </template>
 
 <style scoped>

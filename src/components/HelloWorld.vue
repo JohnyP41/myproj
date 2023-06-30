@@ -13,12 +13,12 @@
     })
 }).then(response => response.json()).then(response =>{{
 
-  let text = "<div><ul>";
+  let text = "<ul class=\"list-group\">";
   response["elements"].forEach(myFunction);
-  text += "</div></ul>";
+  text += "</ul class=\"list-group\">";
   document.getElementById("name").innerHTML = text;
   function myFunction(value) {
-      text += "<li>"+"<div id=\"nam\">"+value["translated"]["name"]+"</div>"+"<div id=\"desc\">"+value["translated"]["description"]+"</div>"+"<div id=\"price\">"+"Cena "+value["calculatedPrice"]["totalPrice"]+"</div>"+ "</li>";
+      text += "<li class=\"list-group-item\">"+"<div id=\"nam\">"+value["translated"]["name"]+"</div>"+"<div id=\"desc\">"+value["translated"]["description"]+"</div>"+"<div id=\"price\">"+"Cena "+value["calculatedPrice"]["totalPrice"]+"</div>"+ "</li>";
 } 
 }})
 
@@ -42,13 +42,14 @@ function clek()
     })
 }).then(response => response.json()).then(response =>{{
 
-  let text = "<div><ul>";
+  let text = "<ul class=\"list-group\">";
   response["elements"].forEach(myFunction);
-  text += "</div></ul>";
+  text += "</ul class=\"list-group\">";
   document.getElementById("name").innerHTML = text;
   function myFunction(value) {
-      text += "<li>"+"<div id=\"nam\">"+value["translated"]["name"]+"</div>"+"<div id=\"desc\">"+value["translated"]["description"]+"</div>"+"<div id=\"price\">"+"Cena "+value["calculatedPrice"]["totalPrice"]+"</div>"+ "</li>";
-} 
+    text += "<li class=\"list-group-item\">"+"<div id=\"nam\">"+value["translated"]["name"]+"</div>"+"<div id=\"desc\">"+value["translated"]["description"]+"</div>"+"<div id=\"price\">"+"Cena "+value["calculatedPrice"]["totalPrice"]+"</div>"+ "</li>";
+
+  } 
 }})
   }
   else{
@@ -67,13 +68,14 @@ function clek()
     'sw-access-key':'SWSCMDV3N2DIOUNZTKNNCTBBCW'
   }
 }).then((response) => response.json()).then((json) => {{
-  console.log(message)
-  let text = "<div><ul>";
+
+  let text = "<ul class=\"list-group\">";
   json["elements"].forEach(myFunction);
-  text += "</div></ul>";
+  text += "</ul class=\"list-group\">";
   document.getElementById("name").innerHTML = text;
   function myFunction(value) {
-      text += "<li>"+"<div id=\"nam\">"+value["translated"]["name"]+"</div>"+"<div id=\"desc\">"+value["translated"]["description"]+"</div>"+"<div id=\"price\">"+"Cena "+value["calculatedPrice"]["totalPrice"]+"</div>"+ "</li>";
+    text += "<li class=\"list-group-item\">"+"<div id=\"nam\">"+value["translated"]["name"]+"</div>"+"<div id=\"desc\">"+value["translated"]["description"]+"</div>"+"<div id=\"price\">"+"Cena "+value["calculatedPrice"]["totalPrice"]+"</div>"+ "</li>";
+
   }
 
 }});
@@ -98,12 +100,13 @@ function click(){
   }
 }).then((response) => response.json()).then((json) => {{
   
-  let text = "<div><ul>";
+  let text = "<div><ul class=\"list-group\">";
   json["elements"].forEach(myFunction);
-  text += "</div></ul>";
+  text += "</div></ul class=\"list-group\">";
   document.getElementById("name").innerHTML = text;
   function myFunction(value) {
-      text += "<li>"+"<div id=\"nam\">"+value["translated"]["name"]+"</div>"+"<div id=\"desc\">"+value["translated"]["description"]+"</div>"+"<div id=\"price\">"+"Cena "+value["calculatedPrice"]["totalPrice"]+"</div>"+ "</li>";
+    text += "<li class=\"list-group-item\">"+"<div id=\"nam\">"+value["translated"]["name"]+"</div>"+"<div id=\"desc\">"+value["translated"]["description"]+"</div>"+"<div id=\"price\">"+"Cena "+value["calculatedPrice"]["totalPrice"]+"</div>"+ "</li>";
+
   }
 
 }});
@@ -123,38 +126,28 @@ function click(){
   <div class="container-fluid">
     <a class="navbar-brand text-white bg-dark"  >
       <h1>Shopware listing</h1>
-      <select  @input="clek()" id="list">
+      <select class="form-select text-white bg-dark" @input="clek()" id="list">
    <option value="price-asc"  selected="true">Najtańsze</option>
    <option value="price-desc" >Najdroższe</option>
    </select>
     </a>
-    
   </div>
 </nav>
-    <h1 class="green">
-
-    </h1>
+<br>
+    <br>    
+    <br>
     <h3>
       <div class="dropdown">
-      <input class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" type="text"  @change="click()" id="site-search" name="q" placeholder="Szukaj...">
-      
+      <input class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" type="text"  @change="click()" id="site-search" name="q" placeholder="Szukaj..."> 
     </div>
     </h3>
-    <div id="name" class="box"></div>
+    <div id="name" ></div>
 
     
   </div>
 </template>
 
 <style scoped>
-.box {
-  background-color: #ffffff8c;
-  padding: 28px 36px;
-  border-radius: 8px;
-  flex: 0 32%;
-  font-size: 14px;
-  font-weight: 500;
-}
 h1 {
   font-weight: 500;
   font-size: 2.6rem;

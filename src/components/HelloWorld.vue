@@ -79,7 +79,6 @@ function clek()
 }});
   }
 
-
 }
 
 function click(){
@@ -120,23 +119,42 @@ function click(){
 
 <template>
   <div class="greetings">
-    <h1 class="green"><a href="">Shopware listing</a>
-    <select @input="clek()" id="list">
+    <nav class="navbar navbar-light text-white bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white bg-dark"  >
+      <h1>Shopware listing</h1>
+      <select  @input="clek()" id="list">
    <option value="price-asc"  selected="true">Najtańsze</option>
    <option value="price-desc" >Najdroższe</option>
    </select>
+    </a>
+    
+  </div>
+</nav>
+    <h1 class="green">
+
     </h1>
     <h3>
       <div class="dropdown">
-      <input type="text"  @change="click()" id="site-search" name="q" placeholder="Szukaj...">
+      <input class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" type="text"  @change="click()" id="site-search" name="q" placeholder="Szukaj...">
+      
     </div>
     </h3>
-    <div id="name"></div>
+    <div id="name" class="box"></div>
+
+    
   </div>
 </template>
 
 <style scoped>
-
+.box {
+  background-color: #ffffff8c;
+  padding: 28px 36px;
+  border-radius: 8px;
+  flex: 0 32%;
+  font-size: 14px;
+  font-weight: 500;
+}
 h1 {
   font-weight: 500;
   font-size: 2.6rem;

@@ -13,9 +13,6 @@
     })
 }).then(response => response.json()).then(response =>{{
 
-  var elem=document.getElementById("list");
-  var nope=elem.value;
-
   let text = "<div><ul>";
   response["elements"].forEach(myFunction);
   text += "</div></ul>";
@@ -27,7 +24,10 @@
 
 function clek()
 {
-  var list=document.getElementById("list");
+  var message=document.getElementById("site-search");
+  message=message.value;
+  if(message==""){
+    var list=document.getElementById("list");
   list=list.value
 
   fetch("https://demo.crehler.dev/store-api/product-listing/e435c9763b0d44fcab67ea1c0fdb3fa0", {
@@ -42,9 +42,6 @@ function clek()
     })
 }).then(response => response.json()).then(response =>{{
 
-  var elem=document.getElementById("list");
-  var nope=elem.value;
-
   let text = "<div><ul>";
   response["elements"].forEach(myFunction);
   text += "</div></ul>";
@@ -53,6 +50,35 @@ function clek()
       text += "<li>"+"<div id=\"nam\">"+value["translated"]["name"]+"</div>"+"<div id=\"desc\">"+value["translated"]["description"]+"</div>"+"<div id=\"price\">"+"Cena "+value["calculatedPrice"]["totalPrice"]+"</div>"+ "</li>";
 } 
 }})
+  }
+  else{
+  var list=document.getElementById("list");
+  list=list.value
+  var message=document.getElementById("site-search");
+  message=message.value;
+  fetch("https://demo.crehler.dev/store-api/search", {
+  method: "POST",
+  body: JSON.stringify({
+    search: String(message),
+    order: String(list)
+  }),
+  headers: {
+    "Content-type": "application/json",
+    'sw-access-key':'SWSCMDV3N2DIOUNZTKNNCTBBCW'
+  }
+}).then((response) => response.json()).then((json) => {{
+  console.log(message)
+  let text = "<div><ul>";
+  json["elements"].forEach(myFunction);
+  text += "</div></ul>";
+  document.getElementById("name").innerHTML = text;
+  function myFunction(value) {
+      text += "<li>"+"<div id=\"nam\">"+value["translated"]["name"]+"</div>"+"<div id=\"desc\">"+value["translated"]["description"]+"</div>"+"<div id=\"price\">"+"Cena "+value["calculatedPrice"]["totalPrice"]+"</div>"+ "</li>";
+  }
+
+}});
+  }
+
 
 }
 

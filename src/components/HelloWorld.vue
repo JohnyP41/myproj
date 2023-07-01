@@ -20,14 +20,14 @@ fetch('https://demo.crehler.dev/store-api/product-listing/e435c9763b0d44fcab67ea
       function myFunction(value) {
         text +=
           '<li class="list-group-item">' +
-          '<div id="nam">' +
+          '<div id="nam"><b>' +
           value['translated']['name'] +
-          '</div>' +
+          '</b></div>' +
           '<div id="desc">' +
           value['translated']['description'] +
           '</div>' +
           '<div id="price">' +
-          'Cena ' +
+          '<b>Cena</b> ' +
           value['calculatedPrice']['totalPrice'] +
           '</div>' +
           '</li>'
@@ -62,18 +62,18 @@ function clek() {
           document.getElementById('name').innerHTML = text
           function myFunction(value) {
             text +=
-              '<li class="list-group-item">' +
-              '<div id="nam">' +
-              value['translated']['name'] +
-              '</div>' +
-              '<div id="desc">' +
-              value['translated']['description'] +
-              '</div>' +
-              '<div id="price">' +
-              'Cena ' +
-              value['calculatedPrice']['totalPrice'] +
-              '</div>' +
-              '</li>'
+          '<li class="list-group-item">' +
+          '<div id="nam"><b>' +
+          value['translated']['name'] +
+          '</b></div>' +
+          '<div id="desc">' +
+          value['translated']['description'] +
+          '</div>' +
+          '<div id="price">' +
+          '<b>Cena</b> ' +
+          value['calculatedPrice']['totalPrice'] +
+          '</div>' +
+          '</li>'
           }
         }
       })
@@ -102,18 +102,18 @@ function clek() {
           document.getElementById('name').innerHTML = text
           function myFunction(value) {
             text +=
-              '<li class="list-group-item">' +
-              '<div id="nam">' +
-              value['translated']['name'] +
-              '</div>' +
-              '<div id="desc">' +
-              value['translated']['description'] +
-              '</div>' +
-              '<div id="price">' +
-              'Cena ' +
-              value['calculatedPrice']['totalPrice'] +
-              '</div>' +
-              '</li>'
+          '<li class="list-group-item">' +
+          '<div id="nam"><b>' +
+          value['translated']['name'] +
+          '</b></div>' +
+          '<div id="desc">' +
+          value['translated']['description'] +
+          '</div>' +
+          '<div id="price">' +
+          '<b>Cena</b> ' +
+          value['calculatedPrice']['totalPrice'] +
+          '</div>' +
+          '</li>'
           }
         }
       })
@@ -121,6 +121,48 @@ function clek() {
 }
 
 function click() {
+  var message = document.getElementById('site-search')
+  message = message.value
+  if (message == '') {
+    var list = document.getElementById('list')
+    list = list.value
+
+    fetch('https://demo.crehler.dev/store-api/product-listing/e435c9763b0d44fcab67ea1c0fdb3fa0', {
+      method: 'POST',
+      headers: {
+        'sw-access-key': 'SWSCMDV3N2DIOUNZTKNNCTBBCW',
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        order: String(list)
+      })
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        {
+          let text = '<ul class="list-group">'
+          response['elements'].forEach(myFunction)
+          text += '</ul class="list-group">'
+          document.getElementById('name').innerHTML = text
+          function myFunction(value) {
+            text +=
+          '<li class="list-group-item">' +
+          '<div id="nam"><b>' +
+          value['translated']['name'] +
+          '</b></div>' +
+          '<div id="desc">' +
+          value['translated']['description'] +
+          '</div>' +
+          '<div id="price">' +
+          '<b>Cena</b> ' +
+          value['calculatedPrice']['totalPrice'] +
+          '</div>' +
+          '</li>'
+          }
+        }
+      })
+  }else{
   var list = document.getElementById('list')
   list = list.value
   var message = document.getElementById('site-search')
@@ -145,41 +187,43 @@ function click() {
         document.getElementById('name').innerHTML = text
         function myFunction(value) {
           text +=
-            '<li class="list-group-item">' +
-            '<div id="nam">' +
-            value['translated']['name'] +
-            '</div>' +
-            '<div id="desc">' +
-            value['translated']['description'] +
-            '</div>' +
-            '<div id="price">' +
-            'Cena ' +
-            value['calculatedPrice']['totalPrice'] +
-            '</div>' +
-            '</li>'
+          '<li class="list-group-item">' +
+          '<div id="nam"><b>' +
+          value['translated']['name'] +
+          '</b></div>' +
+          '<div id="desc">' +
+          value['translated']['description'] +
+          '</div>' +
+          '<div id="price">' +
+          '<b>Cena</b> ' +
+          value['calculatedPrice']['totalPrice'] +
+          '</div>' +
+          '</li>'
         }
       }
     })
 }
+}
+
 </script>
 
 <template>
-  <div class="greetings">
     <nav class="navbar navbar-light text-white bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand text-white bg-dark">
-          <h1>Shopware listing</h1>
+          <h1><b>Shopware listing</b></h1>
+        </a>
+      <div id="lol">
           <select class="form-select text-white bg-dark" @input="clek()" id="list">
             <option value="price-asc" selected="true">Najtańsze</option>
             <option value="price-desc">Najdroższe</option>
           </select>
-        </a>
+        </div>
       </div>
     </nav>
     <br />
     <br />
     <br />
-    <h3>
       <div class="dropdown">
         <input
           class="form-select form-select-lg mb-3"
@@ -187,21 +231,44 @@ function click() {
           type="text"
           @change="click()"
           id="site-search"
-          name="q"
+          name="qbe"
           placeholder="Szukaj..."
         />
       </div>
-    </h3>
+      <br />
+    <br />
     <div id="name"></div>
-  </div>
 </template>
 
 <style scoped>
+
+#menu {
+	background: #F7F7F9;
+	border-radius: 0;
+	display: inline-block;
+	width:100%;
+	margin:0px;
+}
+.menu-left ul {
+	margin: 0;
+	padding:0;
+	font-size: 17px; 
+    width: 100%;
+}
+.menu-left ul li {
+	display:inline-block;
+	vertical-align: top;
+	width: 30%;
+  text-align:center;
+}
+
+#list{
+    float:right;
+}
 h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
+  font-weight: 100;
+  font-size: 1.5rem;
   position: relative;
-  top: -10px;
 }
 
 h3 {
